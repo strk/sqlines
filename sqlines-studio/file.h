@@ -39,12 +39,13 @@ public:
 	static bool IsDirectoryInPath(const char *path);
 
 	// Check if the path points to an existing directory
-	static bool IsDirectory(const char *path);	
+	static bool IsDirectory(const char *path);
+	#ifdef WIN32
 	static bool IsDirectory(_finddata_t *fileInfo);
 
 	// Check if the file is found
 	static bool IsFile(_finddata_t *fileInfo);
-
+    #endif
 	// Find directory by a template in the last path item
 	static void FindDir(const char *dir_template, std::string &dir); 
 

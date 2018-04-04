@@ -183,8 +183,13 @@ void MainWindow::loadOptions()
     QString workDir = settings->value("working_directory").toString();
     if(workDir.isEmpty())
         workingDirectory = QDir::toNativeSeparators(
+            #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+                    QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
+                    "/SQLines");
+            #else
                     QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation) +
                     "/SQLines");
+            #endif
     else
         workingDirectory = workDir;
 

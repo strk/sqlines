@@ -25,8 +25,13 @@
 #include <io.h>
 #include <direct.h>
 #else
+#include <QDirIterator>
 #include <sys/stat.h>
+#ifdef __APPLE__
+#include <sys/uio.h>
+#else
 #include <sys/io.h>
+#endif
 #include <unistd.h>
 
 #define _read read
@@ -176,7 +181,10 @@ void File::FindDir(const char *dir_template, std::string &dir)
 	}
 
 	_findclose(findHandle);
-
+#else
+	QDirIterator it(dir.c_str(), QStringList() << dir_template, QDir::Dirs, QDirIterator::Subdirectories|QDirIterator::FollowSymlinks);
+	if (it.hasNext())
+    	dir = it.next().toStdString();
 #endif
 }
 
@@ -289,7 +297,11 @@ std::string File::GetRelativeName(const char* base, const char *file)
 		return relative;
 
 	// If base and file are equal return the file name
+	#ifdef WIN32
 	if(_stricmp(base, file))
+	#else
+	if(strcasecmp(base, file))
+	#endif
 	{
 		int pos = File::GetLastDirSeparatorPos(file);
 		relative = (pos > 0) ? file + pos + 1 : file;

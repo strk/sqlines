@@ -199,8 +199,11 @@ char* Str::IntToString(int int_value, char *output)
 
 	*output = '\x0';
 
+#ifdef WIN32
 	_itoa_s(int_value, output, 11, 10);
-
+#else
+	snprintf(output, 11, "%d", int_value);
+#endif
 	return output;
 }
 
@@ -208,7 +211,7 @@ char* Str::IntToString(int int_value, char *output)
 void Str::ReplaceFirst(std::string &str, std::string what, std::string with)
 {
 	// Find the substring starting from the first position of the original string
-	int pos = str.find(what, 0);
+	size_t pos = str.find(what, 0);
 
 	if(pos != std::string::npos)
 		str.replace(pos, what.size(), with);
@@ -323,7 +326,7 @@ void Str::SqlTs2Str(short year, short month, short day, short hour, short minute
 		out[26] = '\x0';
 	}
 	else
-		sprintf(out + 20, "%06d", fraction);		// puts terminating 0
+		sprintf(out + 20, "%06ld", fraction);		// puts terminating 0
 }
 
 // Convert 7-byte packed Oracle DATE to string (non-null terminated, exactly 19 characters)
@@ -448,11 +451,11 @@ void Str::GetFractionPartLen(const char *str, int slen, int *out_len)
 // Abbreviations
 struct abbreviations
 {
-	char *word;
-	char *word_up;
+	const char *word;
+	const char *word_up;
 	int len;
-	char *abbr;
-	char *abbr_up;
+	const char *abbr;
+	const char *abbr_up;
 };
 
 // List must be ASC ordered for correct search
@@ -474,7 +477,7 @@ struct abbreviations abbr[] =
 	{ NULL, NULL, 0, NULL, NULL }
 };
 
-char *words_remove[] = { "been", "by", "has", "of", "to", NULL };
+const char *words_remove[] = { "been", "by", "has", "of", "to", NULL };
 
 // Trim string to the specified length by replacing words with abbreviations
 // Abbreviations in PeopleSoft - http://www.acs.utah.edu/acs/qa_standards/psstd02a.htm
@@ -497,7 +500,11 @@ void Str::TrimToAbbr(std::string &input, std::string &output, int max_len)
 		// Check is word needs to be removed
 		while(words_remove[i] != NULL)
 		{
+			#ifdef WIN32
 			if(_strnicmp(words_remove[i], cur, end - cur) == 0)
+			#else
+			if(strncasecmp(words_remove[i], cur, end - cur) == 0)
+			#endif
 			{
 				// Skip following word delimiter
 				if(*end)
@@ -515,7 +522,7 @@ void Str::TrimToAbbr(std::string &input, std::string &output, int max_len)
 		if(removed)
 			continue;
 
-		char *ab = NULL;
+		const char *ab = NULL;
 		i = 0;
 
 		// Find a abbreviation for the word
@@ -533,7 +540,11 @@ void Str::TrimToAbbr(std::string &input, std::string &output, int max_len)
 				break;
 
 			// Compare without case now (upper letters go before lower in ASCII table)
+			#ifdef WIN32
 			c = _strnicmp(abbr[i].word_up, cur, abbr[i].len);
+			#else
+			c = strncasecmp(abbr[i].word_up, cur, abbr[i].len);
+			#endif
 
 			if(c == 0)
 			{
