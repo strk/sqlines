@@ -6,7 +6,7 @@
 #include <string.h>
 #include <errno.h>
 #include "applog.h"
-#include "file.h"
+#include "../sqlcommon/file.h"
 
 // Constructor
 AppLog::AppLog()

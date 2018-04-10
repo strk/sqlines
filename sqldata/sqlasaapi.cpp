@@ -4,7 +4,7 @@
 
 #include <string.h>
 #include <string>
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "sqlasaapi.h"
 #include "os.h"
 

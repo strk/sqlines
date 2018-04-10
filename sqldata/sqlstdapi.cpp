@@ -21,7 +21,7 @@
 #include "sqlociapi.h"
 #include "sqlmysqlapi.h"
 #include "sqlctapi.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "os.h"
 
 // Constructor

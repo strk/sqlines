@@ -28,7 +28,7 @@
 #include <sql.h>
 #include <sqlext.h>
 #include <sqltypes.h> 
-#include <sqlncli.h>
+#include "sqlncli.h"
 #include <oci.h>
 #include <ctpublic.h>
 #include "sqlapibase.h"

@@ -20,8 +20,8 @@
 #include <string.h>
 #include <algorithm>
 #include "sqlparser.h"
-#include "str.h"
-#include "file.h"
+#include "../sqlcommon/str.h"
+#include "../sqlcommon/file.h"
 #include "cobol.h"
 
 // Check for the source type
@@ -344,7 +344,7 @@ void SqlParser::SetMetaFromFile(const char *file)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file, input, (size_t)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return;
 	}
 
@@ -524,7 +524,7 @@ bool SqlParser::MapObjectName(Token *token)
 		{
 			// Change name
 			token->t_str = Str::GetCopy(i->second.c_str());
-			token->t_len = strlen(token->t_str);
+			token->t_len = ((token->t_str == NULL) ? 0 : strlen(token->t_str));
 
 			return true;
 		}

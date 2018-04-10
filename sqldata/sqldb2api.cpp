@@ -18,7 +18,7 @@
 
 #include <stdlib.h>
 #include "sqldb2api.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "os.h"
 
 // Oracle OCI, Sybase ASE, MySQL C definitions

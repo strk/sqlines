@@ -27,6 +27,14 @@ void* CreateParserObject()
 	return new SqlParser();
 }
 
+void DeleteParserObject(void *parser)
+{
+	if (parser == NULL)
+		return;
+
+	delete (SqlParser*)parser;
+}
+
 void SetParserTypes(void *parser, short source, short target)
 {
 	if(parser == NULL)

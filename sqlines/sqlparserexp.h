@@ -38,6 +38,7 @@
 #define SQL_SYBASE_ADS          16
 
 extern void* CreateParserObject();
+extern void DeleteParserObject(void *parser);
 extern void SetParserTypes(void *parser, short source, short target);
 extern int SetParserOption(void *parser, const char *option, const char *value);
 extern int ConvertSql(void *parser, const char *input, int size, const char **output, int *out_size, int *lines);

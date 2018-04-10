@@ -186,9 +186,8 @@ void Os::GetLastErrorText(const char *prefix, char *output, int len)
 	if(output == NULL || len <= 0)
 		return;
 
-	char error[1024];
-
 #if defined(WIN32) || defined(WIN64)
+	char error[1024];
 	DWORD rc = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(), 
 						1033, (LPSTR)error, 1024, NULL);
  

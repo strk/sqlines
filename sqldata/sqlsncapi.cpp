@@ -18,7 +18,7 @@
 
 #include <string.h>
 #include <string>
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "sqlsncapi.h"
 #include "os.h"
 

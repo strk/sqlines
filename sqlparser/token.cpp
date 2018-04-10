@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "token.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 
 // Constructor/destructor
 Token::Token()
@@ -369,9 +369,14 @@ void Token::Change(Token *token, int value)
 	Token::ClearTarget(token);
 
 	token->t_str = new char[11];
-	sprintf((char*)token->t_str, "%d", value);
 
-	token->t_len = strlen(token->t_str);
+	if (token->t_str != NULL) {
+		sprintf((char*)token->t_str, "%d", value);
+
+		token->t_len = strlen(token->t_str);
+	} else {
+		token->t_len = 0;
+	}
 }
 
 void Token::Change(Token *token, Token *values)
@@ -780,16 +785,16 @@ void TokenStr::Append(Token *token, size_t start, size_t l)
 		return;
 
 	// Target value has priority
-	if(token->t_str != NULL)
-		str.append(token->t_str + start, l); 
-	else
-	if(token->str != NULL)
-		str.append(token->str + start, l); 
-	else
-	if(token->wstr != NULL)
+	if((token->t_str != NULL) && (start < token->t_len)) {
+		str.append(token->t_str + start, l);
+		len += l;
+	} else if(token->str != NULL) {
+		str.append(token->str + start, l);
+		len += l;
+	} else if(token->wstr != NULL) {
 		wstr.append(token->wstr + start, l); 
-
-	len += l;
+		len += l;
+	}
 }
 
 void TokenStr::Append(Token *token)

@@ -22,7 +22,7 @@
 
 #include <stdio.h>
 #include "sqlmysqlapi.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "os.h"
 
 // Required to access ODBC and CT-Lib constants

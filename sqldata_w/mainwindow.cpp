@@ -1,12 +1,17 @@
+#if defined(WIN32) || defined(WIN64)
 #include <process.h>
+#else
+#include <unistd.h>
+#include <QtConcurrent>
+#endif
 #include <QMessageBox>
 #include <QDesktopWidget>
 #include <QAbstractItemView>
 #include <QFileDialog>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "str.h"
-#include "os.h"
+#include "../sqlcommon/str.h"
+#include "../sqldata/os.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -253,7 +258,11 @@ void MainWindow::RunTransfer()
     SaveOptions();
 
     // Run transfer thread
+    #if defined(WIN32) || defined(WIN64)
     _beginthreadex(NULL, 0, &MainWindow::RunCommandThreadS, this, 0, NULL);
+    #else
+    QtConcurrent::run(&MainWindow::RunCommandThreadS, this);
+    #endif
 }
 
 // Run Validation command
@@ -315,7 +324,11 @@ void MainWindow::RunValidation()
     SaveOptions();
 
     // Run validation thread
+    #if defined(WIN32) || defined(WIN64)
     _beginthreadex(NULL, 0, &MainWindow::RunCommandThreadS, this, 0, NULL);
+    #else
+    QtConcurrent::run(&MainWindow::RunCommandThreadS, this);
+    #endif
 }
 
 // Build a command line string
@@ -2210,28 +2223,28 @@ void MainWindow::SqlServerSWindowsAuthChecked(int state)
     }
 }
 
-QString MainWindow::EncodePassword(QString &password)
+QString MainWindow::EncodePassword(const QString &password)
 {
     QString encoded;
     char ch;
 
     for(int i = 0; i < password.size(); i++)
     {
-        ch = password.at(i).toAscii() ^ (i + 1);
+        ch = password.at(i).toLatin1() ^ (i + 1);
         encoded.append(ch);
     }
 
     return encoded;
 }
 
-QString MainWindow::DecodePassword(QString &encoded)
+QString MainWindow::DecodePassword(const QString &encoded)
 {
     QString password;
     char ch;
 
     for(int i = 0; i < encoded.size(); i++)
     {
-        ch = encoded.at(i).toAscii() ^ (i + 1);
+        ch = encoded.at(i).toLatin1() ^ (i + 1);
         password.append(ch);
     }
 

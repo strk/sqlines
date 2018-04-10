@@ -21,7 +21,7 @@
 #include <string>
 #include <algorithm>
 #include "parameters.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 
 // Process parameters in command line
 int Parameters::Load(int argc, char** argv)

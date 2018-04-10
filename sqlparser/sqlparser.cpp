@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "sqlparser.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "cobol.h"
 
 char *g_symbols = (char*)" _\"'.,;:(){}[]=+-*<>!$~|~`@#%^&/\\\n\r\t";

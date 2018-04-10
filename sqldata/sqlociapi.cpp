@@ -18,7 +18,7 @@
 
 #include <stdio.h>
 #include "sqlociapi.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "os.h"
 
 // ODBC, Sybase CT-Lib, MySQL C definitions

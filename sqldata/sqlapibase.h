@@ -23,7 +23,7 @@
 #include <list>
 #include "parameters.h"
 #include "applog.h"
-#include "file.h"
+#include "../sqlcommon/file.h"
 
 // Error codes
 #define SQL_DBAPI_UNKNOWN_ERROR			    -1

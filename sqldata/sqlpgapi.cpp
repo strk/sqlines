@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include "sqlpgapi.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "os.h"
 
 // Required to access ODBC, CT-Lib, MySQL C constants

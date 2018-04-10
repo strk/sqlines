@@ -3,7 +3,7 @@
 // Copyright (c) 2012 SQLines. All rights reserved
 
 #include "sqlifmxapi.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "os.h"
 
 // Constructor

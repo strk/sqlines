@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += concurrent
 
 TARGET = sqldata_w
 TEMPLATE = app
@@ -12,7 +13,7 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
 		tablewidget.cpp \
-    ..\\sqldata\\str.cpp \
+    ..\\sqlcommon\\str.cpp \
     ..\\sqldata\\sqlsncapi.cpp \
     ..\\sqldata\\sqlociapi.cpp \
     ..\\sqldata\\sqldb.cpp \
@@ -34,7 +35,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
 	tablewidget.h \
-    ..\\sqldata\\str.h \
+    ..\\sqlcommon\\str.h \
     ..\\sqldata\\sqlsncapi.h \
     ..\\sqldata\\sqlociapi.h \
     ..\\sqldata\\sqldb.h \

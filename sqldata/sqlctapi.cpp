@@ -17,9 +17,9 @@
 // SqlCtApi Sybase CTLIB API
 
 #include "sqlctapi.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "os.h"
-#include "file.h"
+#include "../sqlcommon/file.h"
 
 // Constructor
 SqlCtApi::SqlCtApi()
@@ -403,7 +403,7 @@ int SqlCtApi::ExecuteScalar(const char *query, int *result, size_t *time_spent)
 		CS_INT len;
 		CS_SMALLINT ind;
 	
-		CS_DATAFMT fmt = {0};
+		CS_DATAFMT fmt = {{0}};
 
 		fmt.datatype = CS_INT_TYPE;
 		fmt.maxlength = sizeof(int);

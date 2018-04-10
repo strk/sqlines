@@ -23,7 +23,7 @@
 // Transform format string with parameters to concatenation expression
 void SqlParser::PostgresFormatToConcat(Token *format, ListW &params)
 {
-	if(format == NULL && format->len > 0)
+	if((format == NULL) || ((format->str == NULL) && (format->len > 0)))
 		return;
 
 	ListwItem *list = params.GetFirst();

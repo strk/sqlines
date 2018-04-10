@@ -21,8 +21,8 @@
 #include <string>
 #include <algorithm>
 #include "parameters.h"
-#include "str.h"
-#include "file.h"
+#include "../sqlcommon/str.h"
+#include "../sqlcommon/file.h"
 #include "os.h"
 
 // Constructor
@@ -223,7 +223,7 @@ int Parameters::LoadConfigFile()
 	if(File::GetContent(_cfg_file, input, (size_t)size) == -1)
 	{
 		Os::GetLastErrorText(NULL, _cfg_read_err, CFG_ERROR_LEN);
-		delete input;
+		delete[] input;
 		return -1;
 	}
 
@@ -282,7 +282,7 @@ int Parameters::LoadConfigFile()
 	}
 
 	_cfg_read_ok = true;
-	delete input;
+	delete[] input;
 
 	return 0;
 }

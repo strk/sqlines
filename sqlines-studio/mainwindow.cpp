@@ -33,7 +33,7 @@
 #include "aboutdialog.h"
 #include "options.h"
 #include "scripttab.h"
-#include "file.h"
+#include "../sqlcommon/file.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -143,7 +143,11 @@ void MainWindow::startSqlines(QString &source_file)
     // Source file
     args.append("-in = " + source_file);
 
+    #ifdef WIN32
     sqlinesProcess.start("sqlines.exe", args);
+    #else
+    sqlinesProcess.start(QCoreApplication::applicationDirPath() + "/sqlines", args);
+    #endif
 }
 
 // SQLines command line process successfully started
@@ -165,7 +169,11 @@ void MainWindow::sqlinesFinished(int, QProcess::ExitStatus)
 // handling errors while launching SQLines command line tool
 void MainWindow::sqlinesError(QProcess::ProcessError)
 {
+    #ifdef WIN32
     QMessageBox::critical(this, "SQLines Studio", "Starting sqlines.exe - " + sqlinesProcess.errorString());
+    #else
+    QMessageBox::critical(this, "SQLines Studio", "Starting sqlines - " + sqlinesProcess.errorString());
+    #endif
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)

@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "sqlparser.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "cobol.h"
 
 // Convert an identifier
@@ -647,7 +647,7 @@ bool SqlParser::ConvertLocalTableColumn(Token *token)
 // Convert a procedure, function parameter
 void SqlParser::ConvertParameterIdentifier(Token *token)
 {
-	if(token == NULL && token->len > 0)
+	if((token == NULL) || ((token->str == NULL) && (token->len > 0)))
 		return;
 
 	// Convert @ to p_ for SQL Server, Sybase
@@ -692,7 +692,7 @@ void SqlParser::ConvertParameterIdentifier(Token *ref, Token *decl)
 // Convert a local variable
 void SqlParser::ConvertVariableIdentifier(Token *token)
 {
-	if(token == NULL && token->len > 0)
+	if((token == NULL) || ((token->str == NULL) && (token->len > 0)))
 		return;
 
 	// Check if a variable with this name already declared
@@ -1744,7 +1744,7 @@ bool SqlParser::ParseKeyConstraint(Token * /*alter*/, Token *table_name, Token *
 			pkcols.Add(col);
 
 		// For Greenplum, add column to DISTRIBUTED BY in CREATE TABLE
-		if(greenplum_distributed == true)
+		if(greenplum_distributed == true && cr_table_end != NULL)
 		{
 			if(count > 0)
 				Append(cr_table_end->book, ", ", L", ", 2);
@@ -2139,10 +2139,10 @@ bool SqlParser::ParseExpression(Token *first, int prev_operator)
 		}
 		else
 		{
-			ParseExpression(next);
-
-			// Propagate data type from expression to (
-			first->data_type = next->data_type;			
+			if(ParseExpression(next)) {
+				// Propagate data type from expression to (
+				first->data_type = next->data_type;	
+			}		
 		}
 
 		// Next should be )

@@ -28,6 +28,10 @@
 #include "sqlapibase.h"
 #include "sqldb.h"
 
+// Sybase defines
+#define CS_SEC_EXTENDED_ENCRYPTION	(CS_INT)9213
+#define CS_DATES_YMDHMSUS_YYYY	(CS_INT)140	/* yyyy-mm-dd hh:mm:ss.zzzzzz */
+
 // Sybase ASE 16 and 15 DLLs
 #if defined(_WIN64)
 #define CTLIB_DLL				"libsybct64.dll"

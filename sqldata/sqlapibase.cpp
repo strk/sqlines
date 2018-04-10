@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <algorithm>
 #include "sqlapibase.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 
 bool SqlApiBase::_static_init = false;
 

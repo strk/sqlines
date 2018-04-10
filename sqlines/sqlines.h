@@ -69,6 +69,7 @@ class Sqlines
 
 public:
     Sqlines();
+    ~Sqlines();
 
     // Run the tool with command line parameters
     int Run(int argc, char** argv);

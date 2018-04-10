@@ -35,7 +35,7 @@
 #include "sqldb2api.h"
 #include "sqlodbcapi.h"
 #include "sqlstdapi.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "os.h"
 
 // Constructor
@@ -1658,9 +1658,9 @@ int SqlDb::GenerateCreateTable(SqlCol *s_cols, const char *s_table, const char *
 		}
 		else
 		// Oracle NUMBER as DECIMAL
-		if((source_type == SQLDATA_ORACLE && s_cols[i]._native_dt == SQLT_NUM ||
-			source_type == SQLDATA_ODBC && source_subtype == SQLDATA_ORACLE && s_cols[i]._native_dt == SQL_DECIMAL) &&
-			((s_cols[i]._precision >= 10 && s_cols[i]._precision <= 38) || s_cols[i]._scale != 0) ||
+		if((((source_type == SQLDATA_ORACLE && s_cols[i]._native_dt == SQLT_NUM) ||
+			(source_type == SQLDATA_ODBC && source_subtype == SQLDATA_ORACLE && s_cols[i]._native_dt == SQL_DECIMAL)) &&
+			((s_cols[i]._precision >= 10 && s_cols[i]._precision <= 38) || s_cols[i]._scale != 0)) ||
 			// Sybase ASE NUMERIC and DECIMAL
 			(source_type == SQLDATA_SYBASE && (s_cols[i]._native_dt == CS_NUMERIC_TYPE || s_cols[i]._native_dt == CS_DECIMAL_TYPE)) ||
 			// SQL Server, DB2, Informix, Sybase ASA DECIMAL/NUMERIC
@@ -2907,8 +2907,8 @@ bool SqlDb::ValidateCompareDatetimes(SqlCol *s_col, const char *s_string, int s_
 	int comp = -1;
 
 	// Oracle TIMESTAMP compared with MySQL DATETIME without fraction
-	if((source_type == SQLDATA_ORACLE && s_col->_native_dt == SQLT_TIMESTAMP) ||
-		(source_type == SQLDATA_SYBASE && (s_col->_native_dt == CS_DATETIME_TYPE || s_col->_native_dt == CS_DATETIME4_TYPE || s_col->_native_dt == CS_DATE_TYPE))
+	if(((source_type == SQLDATA_ORACLE && s_col->_native_dt == SQLT_TIMESTAMP) ||
+		(source_type == SQLDATA_SYBASE && (s_col->_native_dt == CS_DATETIME_TYPE || s_col->_native_dt == CS_DATETIME4_TYPE || s_col->_native_dt == CS_DATE_TYPE)))
 		&& (target_type == SQLDATA_MYSQL))
 	{
 		int s_len_new = s_len;

@@ -44,8 +44,8 @@
 #include <errno.h>
 #include <string>
 #include "filelist.h"
-#include "file.h"
-#include "str.h"
+#include "../sqlcommon/file.h"
+#include "../sqlcommon/str.h"
 
 // Constructor
 FileList::FileList()

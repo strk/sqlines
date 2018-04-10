@@ -7,8 +7,8 @@
 #include <QComboBox>
 #include <QMutex>
 #include <stdarg.h>
-#include "sqldata.h"
-#include "sqldatacmd.h"
+#include "../sqldata/sqldata.h"
+#include "../sqldata/sqldatacmd.h"
 
 #define INI_MAINWINDOW_POS              "mainwindow_position"
 #define INI_MAINTAB_INDEX               "maintab_index"
@@ -239,8 +239,8 @@ private:
     void ConsoleCallback(const char *format, va_list args);
     static void ConsoleCallbackS(void *object, const char *format, va_list args);
 
-    QString EncodePassword(QString &password);
-    QString DecodePassword(QString &encoded);
+    QString EncodePassword(const QString &password);
+    QString DecodePassword(const QString &encoded);
 };
 
 #endif // MAINWINDOW_H

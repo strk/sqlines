@@ -25,10 +25,10 @@
 
 #include <stdio.h>
 #include "sqldatacmd.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "sqldb.h"
 #include "os.h"
-#include "file.h"
+#include "../sqlcommon/file.h"
 
 // Constructor
 SqlDataCmd::SqlDataCmd()
@@ -1246,7 +1246,7 @@ int SqlDataCmd::GetObjectsFromFile(std::list<std::string> &tables)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(_tf.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return -1;
 	}
 
@@ -1277,7 +1277,7 @@ int SqlDataCmd::GetObjectsFromFile(std::list<std::string> &tables)
 		tables.push_back(name);
 	}
 
-	delete input;
+	delete[] input;
 
 	return 0;
 }
@@ -1296,7 +1296,7 @@ int SqlDataCmd::GetQueriesFromFile(std::string &file, std::map<std::string, std:
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return -1;
 	}
 

@@ -24,10 +24,10 @@
 #include <stdio.h>
 #include <algorithm>
 #include "sqldata.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 #include "sqlparserexp.h"
 #include "os.h"
-#include "file.h"
+#include "../sqlcommon/file.h"
 
 // Constructor
 SqlData::SqlData()
@@ -851,7 +851,7 @@ void SqlData::SetTableMappingFromFile(std::string &file)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return;
 	}
 
@@ -912,7 +912,7 @@ void SqlData::SetColumnMappingFromFile(std::string &file)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return;
 	}
 
@@ -1019,7 +1019,7 @@ void SqlData::SetConstraintMappingFromFile(std::string &file)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return;
 	}
 
@@ -1098,7 +1098,7 @@ void SqlData::SetDataTypeMappingFromFile(std::string &file)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return;
 	}
 
@@ -1230,7 +1230,7 @@ void SqlData::SetTableSelectExpressionsFromFile(std::string &file)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return;
 	}
 
@@ -1290,7 +1290,7 @@ void SqlData::SetTableSelectExpressionsAllFromFile(std::string &file)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return;
 	}
 
@@ -1327,7 +1327,7 @@ void SqlData::SetTableWhereConditionsFromFile(std::string &file)
 	// Get content of the file (without terminating 'x0')
 	if(File::GetContent(file.c_str(), input, (unsigned int)size) == -1)
 	{
-		delete input;
+		delete[] input;
 		return;
 	}
 

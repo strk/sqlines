@@ -25,15 +25,28 @@
 #include <string.h>
 #include "sqlines.h"
 #include "filelist.h"
-#include "file.h"
+#include "../sqlcommon/file.h"
 #include "sqlparserexp.h"
 #include "os.h"
-#include "str.h"
+#include "../sqlcommon/str.h"
 
 // Constructor/destructor
 Sqlines::Sqlines()
 {
 	_parser = CreateParserObject();
+	_total_files = 0;
+
+    _a = false;
+	_stdin = false;
+    
+	_exe = NULL;
+}
+
+Sqlines::~Sqlines()
+{
+	DeleteParserObject(_parser);
+	_parser = NULL;
+
 	_total_files = 0;
 
     _a = false;
@@ -216,8 +229,10 @@ int Sqlines::ProcessFile(std::string &file, std::string &out_file, int *in_size,
 		return -1;
 
 	// Allocate a buffer for the file content
-	char *input = new char[size];
+	char *input = new char[size+1];
 
+	input[size] = 0;
+	
 	// Get content of the file (without terminating 'x0')
 	int rc = File::GetContent(file.c_str(), input, size);
 
