@@ -349,6 +349,12 @@ Token* SqlParser::GetNextToken()
 		if(token->IsBlank() == true || token->type == TOKEN_COMMENT)
 			continue;
 
+		// TODO: remove printf
+		if (token->str != NULL) {
+			int len = int(token->len);
+			printf("GetNextToken Line: %lld Token: (%.*s)\n", token->line, len, token->str);
+		} else
+			printf("GetNextToken Line: %lld Token: NULL\n", token->line);
 		return token;
 	}
 
@@ -378,6 +384,12 @@ Token* SqlParser::GetNextToken()
 			break;
 	}
 
+	// TODO: remove printf
+	if (token->str != NULL) {
+		int len = int(token->len);
+		printf("GetNextToken Line: %lld Token: (%.*s)\n", token->line, len, token->str);
+	} else
+		printf("GetNextToken Line: %lld Token: NULL\n", token->line);
 	return token;
 }
 
@@ -1417,24 +1429,27 @@ bool SqlParser::GetWordToken(Token *token)
 	//
 	// NOTE: Including "*cur == '+' ||" below causes expressions where the SQL Server string concatenation
 	//       operator '+' does not have spaces after it to be consumed as part of the following token.
-	if(_remain_size > 1 && (/**cur == '+' ||*/ *cur == '-') /*&& cur[1] >= '0' && cur[1] <= '9'*/ &&
-		// Skip comment --
-		cur[1] != '-') 
-	{
-		char sign = *cur;
-
-		_remain_size--;
-		len++;
-		cur++;
-
-		// Allow spaces follow the sign
-		while(sign == '-' && _remain_size > 1 && *cur == ' ')
-		{
-			_remain_size--;
-			len++;
-			cur++;
-		}
-	}
+	//
+	// NOTE: Including "*cur == '-'" below causes arithmetic expressions to fail in SQL Server
+	//
+//	if(_remain_size > 1 && (/**cur == '+' ||*/ *cur == '-') /*&& cur[1] >= '0' && cur[1] <= '9'*/ &&
+//		// Skip comment --
+//		cur[1] != '-') 
+//	{
+//		char sign = *cur;
+//
+//		_remain_size--;
+//		len++;
+//		cur++;
+//
+//		// Allow spaces follow the sign
+//		while(sign == '-' && _remain_size > 1 && *cur == ' ')
+//		{
+//			_remain_size--;
+//			len++;
+//			cur++;
+//		}
+//	}
 
 	// Identifiers starts as a word but then there is quoted part SCHEMA."TABLE".COL i.e.
 	bool partially_quoted_identifier = false;
