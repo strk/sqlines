@@ -16,6 +16,12 @@
 
 // OS Class - Operating system related functions
 
+#ifdef WIN32
+#include <windows.h>
+#else
+#include <sys/time.h>
+#endif
+
 #include <stdio.h>
 #include "os.h"
 
@@ -177,7 +183,14 @@ bool Os::Is64Bit(const char* /*filename*/)
 // Get current time in milliseconds
 size_t Os::GetTickCount()
 {
+#ifdef WIN32
 	return ::GetTickCount();
+#else
+	struct timeval  tv;
+	gettimeofday(&tv, NULL);
+
+	return tv.tv_sec * 1000 + tv.tv_usec/1000;
+#endif
 }
 
 // Get error message of the last system error

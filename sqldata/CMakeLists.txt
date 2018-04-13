@@ -1,8 +1,12 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.7)
 set(RUNTIME_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 ## Boost
 #find_package(Boost COMPONENTS system filesystem program_options regex REQUIRED QUIET)
+
+if(POLICY CMP0066)
+  cmake_policy(SET CMP0066 NEW)
+endif()
 
 # Oracle
 FIND_PACKAGE(Oracle COMPONENTS OCCI)
@@ -29,7 +33,7 @@ include_directories(${FreeTDS_INCLUDE_DIR})
 find_package(UnixODBC REQUIRED)
 include_directories(${UnixODBC_INCLUDE_DIRS})
 
-add_executable(sqldata applog.cpp ../sqlcommon/file.cpp main.cpp os.cpp parameters.cpp sqlapibase.cpp sqlctapi.cpp sqldatacmd.cpp sqldata.cpp sqldb2api.cpp sqldb.cpp sqlifmxapi.cpp sqlmysqlapi.cpp sqlsncapi.cpp sqlstdapi.cpp sqlociapi.cpp sqlpgapi.cpp ../sqlcommon/str.cpp)
+add_executable(sqldata ../sqlcommon/applog.cpp ../sqlcommon/file.cpp main.cpp ../sqlcommon/os.cpp ../sqlcommon/parameters.cpp sqlapibase.cpp sqlctapi.cpp sqldatacmd.cpp sqldata.cpp sqldb2api.cpp sqldb.cpp sqlifmxapi.cpp sqlmysqlapi.cpp sqlsncapi.cpp sqlstdapi.cpp sqlociapi.cpp sqlpgapi.cpp ../sqlcommon/str.cpp)
 
 target_link_libraries(sqldata sqlparser ${ORACLE_LIBRARIES} ${MYSQL_LIBRARIES} ${PostgreSQL_LIBRARIES} ${FreeTDS_LIBRARIES} ${UnixODBC_LIBRARIES} ${Glog_LIBRARIES} ${CMAKE_DL_LIBS})
 

@@ -21,8 +21,8 @@
 #include <string>
 #include <algorithm>
 #include "parameters.h"
-#include "../sqlcommon/str.h"
-#include "../sqlcommon/file.h"
+#include "str.h"
+#include "file.h"
 #include "os.h"
 
 // Constructor
@@ -209,7 +209,7 @@ int Parameters::LoadConfigFile()
 		return -1;
 
 	// Configuration file size
-	int size = File::GetFileSize(_cfg_file);
+	int64_t size = File::GetFileSize(_cfg_file);
 
 	if(size == -1)
 	{
@@ -217,10 +217,10 @@ int Parameters::LoadConfigFile()
 		return -1;
 	}
  
-	char *input = new char[(size_t)size + 1];
+	char *input = new char[size + 1];
 
 	// Get content of the file (without terminating 'x0')
-	if(File::GetContent(_cfg_file, input, (size_t)size) == -1)
+	if(File::GetContent(_cfg_file, input, static_cast<unsigned int>(size)) == -1)
 	{
 		Os::GetLastErrorText(NULL, _cfg_read_err, CFG_ERROR_LEN);
 		delete[] input;
@@ -288,7 +288,7 @@ int Parameters::LoadConfigFile()
 }
 
 // Get the value by key
-char* Parameters::Get(const char *key)
+const char* Parameters::Get(const char *key)
 {
 	if(key == NULL)
 		return NULL;
@@ -302,5 +302,5 @@ char* Parameters::Get(const char *key)
 	if(i == _map.end())
 		return NULL;
 
-	return (char*)i->second.c_str();
+	return i->second.c_str();
 }

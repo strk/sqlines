@@ -38,7 +38,7 @@ char* Str::SkipSpaces(const char *input)
 		cur++;
 	}
 
-	return (char*)cur;
+	return const_cast<char*>(cur);
 }
 
 // Skip comments, spaces, new lines and tabs
@@ -47,7 +47,7 @@ char* Str::SkipComments(const char *input)
 	if(input == NULL)
 		return NULL;
 
-	char *cur = (char*)input;
+	const char *cur = input;
 
 	while(*cur)
 	{
@@ -63,7 +63,7 @@ char* Str::SkipComments(const char *input)
 			break;
 	}
 
-	return cur;
+	return const_cast<char*>(cur);
 }
 
 // Trim trailing spaces
@@ -131,7 +131,7 @@ char* Str::GetNextInList(const char *input, std::string &output)
 
 	Str::TrimTrailingSpaces(output);
 
-	return (char*)cur;
+	return const_cast<char*>(cur);
 }
 
 // Skip until the specified char is met
@@ -203,6 +203,23 @@ char* Str::IntToString(int int_value, char *output)
 	_itoa_s(int_value, output, 11, 10);
 #else
 	snprintf(output, 11, "%d", int_value);
+#endif
+
+	return output;
+}
+
+// Convert long to string
+char* Str::LongToString(long long_value, char *output)
+{
+	if(output == NULL)
+		return NULL;
+
+	*output = '\x0';
+
+#if defined(WIN32) || defined(_WIN64)
+	_ltoa_s(long_value, output, 11, 10);
+#else
+	snprintf(output, 11, "%ld", long_value);
 #endif
 
 	return output;

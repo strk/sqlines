@@ -299,15 +299,13 @@ int File::GetExtensionPosition(const char *path)
 }
 
 // Get the size of the file
-int File::GetFileSize(const char* file)
+int64_t File::GetFileSize(const char* file)
 {
-	int size = -1;
-
 	if(file == NULL)
 		return -1;
 
 #if defined(WIN32) || defined(WIN64)
-
+	int64_t size = -1;
 	struct _finddata_t fileData;
 
 	// define the file size to allocate buffer
@@ -318,12 +316,11 @@ int File::GetFileSize(const char* file)
 		return -1;
 	}
 
-	size = (int)fileData.size;
+	size = fileData.size;
 
 	_findclose(findHandle);
-
 #else
-
+	off_t size = -1;
 	struct stat info;
   
 	if(stat(file, &info) != -1)
@@ -332,14 +329,13 @@ int File::GetFileSize(const char* file)
 		if(S_ISREG(info.st_mode))
  			size = info.st_size;
 	}
-
 #endif
 
 	return size;
 }
 
 // Get content of the file (without terminating with 'x0')
-int File::GetContent(const char *file, void *input, size_t len)
+int File::GetContent(const char *file, void *input, int64_t len)
 {
 	if(file == NULL)
 		return -1;
@@ -359,7 +355,7 @@ int File::GetContent(const char *file, void *input, size_t len)
 	}
 
 	// Read the file content to the buffer
-	int bytesRead = _read(fileHandle, input, len);
+	ssize_t bytesRead = _read(fileHandle, input, len);
 	if(bytesRead == -1)
 	{
 		_close(fileHandle);
@@ -429,7 +425,7 @@ std::string File::GetRelativeName(const char* base, const char *file)
 }
 
 // Write the buffer to the file
-int File::Write(const char *file, const char* content, size_t size)
+long File::Write(const char *file, const char* content, int64_t size)
 {
 	 if(file == NULL || content == NULL)
 		return -1;
@@ -447,7 +443,7 @@ int File::Write(const char *file, const char* content, size_t size)
 	   return -1;
 
    // write the content to the file 
-   int rc = _write(fileh, content, size);
+   long rc = _write(fileh, content, size);
  
    _close(fileh);
 
@@ -460,7 +456,7 @@ void File::CreateDirectories(const char *path)
 	if(path == NULL)
 		return;
 
-	size_t i = 0;
+	int i = 0;
 
 	// Skip initial / in absolute on Unix, and X:\ on Windows
 	if(path[i] == '/')
@@ -534,7 +530,7 @@ int File::Truncate(const char *file)
 }
 
 // Append data to the existing file
-int File::Append(const char *file, const char *data, unsigned int len)
+long File::Append(const char *file, const char *data, int64_t len)
 {
 	if(file == NULL || data == NULL || len == 0)
 		return -1;
@@ -548,7 +544,7 @@ int File::Append(const char *file, const char *data, unsigned int len)
    if(fileh == -1)
 	   return -1;
 
-   int rc = _write(fileh, data, len);
+   ssize_t rc = _write(fileh, data, len);
    _close(fileh);
 
    return rc;

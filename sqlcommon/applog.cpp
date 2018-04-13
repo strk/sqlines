@@ -1,3 +1,18 @@
+/** 
+ * Copyright (c) 2016 SQLines
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 // AppLog - Application logger class
 // Copyright (c) 2012 SQLines. All rights reserved
@@ -6,7 +21,7 @@
 #include <string.h>
 #include <errno.h>
 #include "applog.h"
-#include "../sqlcommon/file.h"
+#include "file.h"
 
 // Constructor
 AppLog::AppLog()
@@ -71,12 +86,18 @@ void AppLog::Log(const char *format, ...)
 	{
 		if(!_use_stderr)
 		{
+			#pragma clang diagnostic push
+			#pragma clang diagnostic ignored "-Wformat-nonliteral"
 			vprintf(format, args);
+			#pragma clang diagnostic pop
 			fflush(stdout);
 		}
 		else
 		{
+			#pragma clang diagnostic push
+			#pragma clang diagnostic ignored "-Wformat-nonliteral"
 			vfprintf(stderr, format, args);
+			#pragma clang diagnostic pop
 			fflush(stderr);
 		}
 	}
@@ -115,7 +136,10 @@ void AppLog::LogConsole(const char *format, ...)
 	va_start(args, format);
 
 	// log message to console
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wformat-nonliteral"
 	vprintf(format, args);
+	#pragma clang diagnostic pop
 
 	fflush(stdout);
 
@@ -148,7 +172,10 @@ void AppLog::LogFileVaList(const char *format, va_list args)
 	// Log message to file
 	if(file)
 	{
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Wformat-nonliteral"
 		vfprintf(file, format, args);
+		#pragma clang diagnostic pop
 		fclose(file);
 	}
 	else 
@@ -162,15 +189,15 @@ void AppLog::LogFileVaList(const char *format, va_list args)
 }
 
 // Write data buffer to log file
-void AppLog::LogFile(const char *data, int len)
+void AppLog::LogFile(const char *data, int64_t len)
 {
 	if(first_write)
 	{
-		File::Write(_filename.c_str(), data, (size_t)len);
+		File::Write(_filename.c_str(), data, len);
 		first_write = false;
 	}
 	else
-		File::Append(_filename.c_str(), data, (unsigned int)len);
+		File::Append(_filename.c_str(), data, len);
 }
 
 // Write to trace file
@@ -188,7 +215,10 @@ void AppLog::TraceFileVaList(const char *format, va_list args)
 	if(file)
 	{
 		fprintf(file, "%s ", Os::CurrentTimestamp());
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Wformat-nonliteral"
 		vfprintf(file, format, args);
+		#pragma clang diagnostic pop
 		fprintf(file, "\n");
 		fclose(file);
 	}

@@ -61,7 +61,7 @@ public:
 	int LoadStr(const char *input);
 
 	// Get the value by key
-	char* Get(const char *key);
+	const char* Get(const char *key);
 
 	// Set the default configuration file
 	void SetConfigFile(const char *file) { _cfg_file = file; }

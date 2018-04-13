@@ -21,7 +21,7 @@ SOURCES += main.cpp\
     ..\\sqldata\\sqlapibase.cpp \
     ..\\sqlcommon\\file.cpp \
     ..\\sqldata\\sqlodbcapi.cpp \
-    ..\\sqldata\\os.cpp \
+    ..\\sqlcommon\\os.cpp \
     ..\\sqldata\\sqlmysqlapi.cpp \
     ..\\sqldata\\sqlpgapi.cpp \
     ..\\sqldata\\sqlctapi.cpp \
@@ -30,8 +30,8 @@ SOURCES += main.cpp\
     ..\\sqldata\\sqlasaapi.cpp \
     ..\\sqldata\\sqlstdapi.cpp \
     ..\\sqldata\\sqldatacmd.cpp \
-    ..\\sqldata\\applog.cpp \
-    ..\\sqldata\\parameters.cpp
+    ..\\sqlcommon\\applog.cpp \
+    ..\\sqlcommon\\parameters.cpp
 
 HEADERS  += mainwindow.h \
 	tablewidget.h \
@@ -43,7 +43,7 @@ HEADERS  += mainwindow.h \
     ..\\sqldata\\sqlapibase.h \
     ..\\sqlcommon\\file.h \
     ..\\sqldata\\sqlodbcapi.h \
-    ..\\sqldata\\os.h \
+    ..\\sqlcommon\\os.h \
     ..\\sqldata\\sqlmysqlapi.h \
     ..\\sqldata\\sqlpgapi.h \
     ..\\sqldata\\sqlctapi.h \
@@ -52,8 +52,8 @@ HEADERS  += mainwindow.h \
     ..\\sqldata\\sqlasaapi.h \
     ..\\sqldata\\sqlstdapi.h \
     ..\\sqldata\\sqldatacmd.h \
-    ..\\sqldata\\applog.h \
-    ..\\sqldata\\parameters.h \
+    ..\\sqlcommon\\applog.h \
+    ..\\sqlcommon\\parameters.h \
     ..\\sqldata\\sqlparserexp.h
 
 FORMS    += mainwindow.ui

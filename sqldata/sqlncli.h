@@ -62,7 +62,7 @@ typedef union _LARGE_INTEGER {
 	struct {
 		DWORD LowPart;
 		LONG HightPart;
-	};
+	} l;
 	struct {
 		DWORD LowPart;
 		LONG HightPart;
@@ -3059,6 +3059,8 @@ typedef struct dbdatetime4
 
 typedef LONG DBMONEY4;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wpragma-pack"
 #include "pshpack8.h"    // 8-byte structure packing
 
 // New Date Time Structures
@@ -3084,6 +3086,7 @@ typedef struct tagSS_TIMESTAMPOFFSET_STRUCT
         SQLSMALLINT    timezone_minute;
 } SQL_SS_TIMESTAMPOFFSET_STRUCT;
 #include "poppack.h"     // restore original structure packing
+#pragma clang diagnostic pop
 
 // Money value *10,000
 #define DBNUM_PREC_TYPE BYTE

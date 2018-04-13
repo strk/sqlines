@@ -61,6 +61,9 @@ public:
 	// Convert int to string
 	static char* IntToString(int int_value, char *output);
 
+	// Convert long to string
+	static char* LongToString(long long_value, char *output);
+
 	// Replace the first occurrence of a substring
 	static void ReplaceFirst(std::string &str, std::string what, std::string with);
 

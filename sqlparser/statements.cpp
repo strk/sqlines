@@ -1184,7 +1184,7 @@ bool SqlParser::ParseCommentStatement(Token *comment)
 			Token::ChangeNoFormat(is, "'MS_Description',", L"'MS_Description',", 17);
 
 			int cnt = GetIdentPartsCount(name);
-			size_t len = 0;
+			int64_t len = 0;
 			TokenStr str;
 			TokenStr nm;
 

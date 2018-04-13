@@ -41,7 +41,7 @@ extern void* CreateParserObject();
 extern void DeleteParserObject(void *parser);
 extern void SetParserTypes(void *parser, short source, short target);
 extern int SetParserOption(void *parser, const char *option, const char *value);
-extern int ConvertSql(void *parser, const char *input, int size, const char **output, int *out_size, int *lines);
+extern int ConvertSql(void *parser, const char *input, int64_t size, const char **output, int64_t *out_size, int64_t *lines);
 extern void FreeOutput(const char *output);
 extern int CreateAssessmentReport(void *parser, const char *summary);
 

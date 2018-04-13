@@ -44,7 +44,7 @@ set ( sqldata_w_HDRS
 	../sqldata/sqlapibase.h
 	../sqlcommon/file.h
 	../sqldata/sqlodbcapi.h
-	../sqldata/os.h
+	../sqlcommon/os.h
 	../sqldata/sqlmysqlapi.h
 	../sqldata/sqlpgapi.h
 	../sqldata/sqlctapi.h
@@ -53,8 +53,8 @@ set ( sqldata_w_HDRS
 	../sqldata/sqlasaapi.h
 	../sqldata/sqlstdapi.h
 	../sqldata/sqldatacmd.h
-	../sqldata/applog.h
-	../sqldata/parameters.h
+	../sqlcommon/applog.h
+	../sqlcommon/parameters.h
 	../sqldata/sqlparserexp.h
 	)
 
@@ -70,7 +70,7 @@ set ( sqldata_w_SRCS
 	../sqldata/sqlapibase.cpp
 	../sqlcommon/file.cpp
 	../sqldata/sqlodbcapi.cpp
-	../sqldata/os.cpp
+	../sqlcommon/os.cpp
 	../sqldata/sqlmysqlapi.cpp
 	../sqldata/sqlpgapi.cpp
 	../sqldata/sqlctapi.cpp
@@ -79,8 +79,8 @@ set ( sqldata_w_SRCS
 	../sqldata/sqlasaapi.cpp
 	../sqldata/sqlstdapi.cpp
 	../sqldata/sqldatacmd.cpp
-	../sqldata/applog.cpp
-	../sqldata/parameters.cpp
+	../sqlcommon/applog.cpp
+	../sqlcommon/parameters.cpp
 	)
 
 set ( sqldata_w_UIS

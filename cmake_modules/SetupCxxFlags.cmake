@@ -89,7 +89,7 @@ if ("${UPPERCASE_BUILD_WARNING_LEVEL}" STREQUAL "CHECKIN")
     # Treat all compiler warnings as errors
     set(CXX_COMMON_FLAGS "${CXX_COMMON_FLAGS} /WX")
   elseif ("${COMPILER_FAMILY}" STREQUAL "clang")
-    set(CXX_COMMON_FLAGS "${CXX_COMMON_FLAGS} -Weverything -Wno-c++98-compat \
+    set(CXX_COMMON_FLAGS "${CXX_COMMON_FLAGS} -Weverything -Winfinite-recursion -Wno-c++98-compat \
 -Wno-c++98-compat-pedantic -Wno-deprecated -Wno-weak-vtables -Wno-padded \
 -Wno-comma -Wno-unused-parameter -Wno-unused-template -Wno-undef \
 -Wno-shadow -Wno-switch-enum -Wno-exit-time-destructors \
@@ -100,7 +100,7 @@ if ("${UPPERCASE_BUILD_WARNING_LEVEL}" STREQUAL "CHECKIN")
 -Wno-cast-align -Wno-vla-extension -Wno-shift-sign-overflow \
 -Wno-used-but-marked-unused -Wno-missing-variable-declarations \
 -Wno-gnu-zero-variadic-macro-arguments -Wconversion -Wno-sign-conversion \
--Wno-disabled-macro-expansion")
+-Wno-disabled-macro-expansion -fcomment-block-commands=retval")
 
     # Version numbers where warnings are introduced
     if ("${COMPILER_VERSION}" VERSION_GREATER "3.3")

@@ -46,7 +46,7 @@ void SetParserTypes(void *parser, short source, short target)
 	sql_parser->SetTypes(source, target);
 }
 
-int ConvertSql(void *parser, const char *input, int size, const char **output, int *out_size, int *lines)
+int ConvertSql(void *parser, const char *input, int64_t size, const char **output, int64_t *out_size, int64_t *lines)
 {
 	if(parser == NULL)
 		return -1;
