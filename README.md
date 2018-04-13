@@ -26,6 +26,12 @@ the users must run dsymutil themselves."
 http://clang.llvm.org/docs/AddressSanitizer.html
 
 "Note that on OS X you may need to run dsymutil on your binary to have the file:line info in the AddressSanitizer reports."
+
+Please run CMake with
+
+-DBUILD_WARNING_LEVEL=CHECKIN
+
+to avoid failures due to compiler warnings.
 ```
 
 ## Development
