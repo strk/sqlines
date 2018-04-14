@@ -59,15 +59,15 @@ Token::~Token()
 	// Delete source values only if allocated flag is set
 	if(source_allocated == true)
 	{
-		delete str;
-		delete wstr;
+		delete[] str;
+		delete[] wstr;
 		str = NULL;
 		wstr = NULL;
 	}
 
 	// Delete target values
-	delete t_str;
-	delete t_wstr;
+	delete[] t_str;
+	delete[] t_wstr;
 	t_str = NULL;
 	t_wstr = NULL;
 }
@@ -633,7 +633,7 @@ void Token::ClearTarget(Token *token)
 	// Remove the current target value if set
 	if(token->t_str != NULL)
 	{
-		delete token->t_str;
+		delete[] token->t_str;
 
 		token->t_str = NULL;
 		token->t_len = 0;

@@ -51,7 +51,7 @@ public:
 	// Get copy of the input string
 	static const char* GetCopy(const char *input, size_t size);
 	static const char* GetCopy(const char *input);
-
+	
 	// Replace character in string (returns the same string)
 	static char* ReplaceChar(char *input, const char what, const char with);
 
