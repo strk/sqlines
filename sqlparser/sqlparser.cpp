@@ -349,12 +349,6 @@ Token* SqlParser::GetNextToken()
 		if(token->IsBlank() == true || token->type == TOKEN_COMMENT)
 			continue;
 
-		// TODO: remove printf
-		if (token->str != NULL) {
-			int len = int(token->len);
-			printf("GetNextToken Line: %lld Token: (%.*s)\n", token->line, len, token->str);
-		} else
-			printf("GetNextToken Line: %lld Token: NULL\n", token->line);
 		return token;
 	}
 
@@ -384,12 +378,6 @@ Token* SqlParser::GetNextToken()
 			break;
 	}
 
-	// TODO: remove printf
-	if (token->str != NULL) {
-		int len = int(token->len);
-		printf("GetNextToken Line: %lld Token: (%.*s)\n", token->line, len, token->str);
-	} else
-		printf("GetNextToken Line: %lld Token: NULL\n", token->line);
 	return token;
 }
 
