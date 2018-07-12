@@ -151,7 +151,7 @@ void SqlParser::InformixConvertReturning(Token *create, Token *procedure)
 		else
 		{
 			// Convert to OUT parameters
-			if(_target == SQL_ORACLE)
+			if(Target(SQL_ORACLE, SQL_POSTGRESQL) == true)
 			{
 				ListwmItem *p =  _spl_returning_out_names.GetFirst();
 
@@ -172,7 +172,8 @@ void SqlParser::InformixConvertReturning(Token *create, Token *procedure)
 					Prepend(datatype, " OUT ", L" OUT ", 5, create);
 
 					// Data type sizes were left, remove them now
-					OracleRemoveDataTypeSize(datatype);
+					if(Target(SQL_ORACLE) == true)
+						OracleRemoveDataTypeSize(datatype);
 
 					if(p != NULL)
 						p = p->next;

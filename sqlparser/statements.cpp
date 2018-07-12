@@ -7670,7 +7670,7 @@ bool SqlParser::ParseReturnStatement(Token *return_)
 		if(_spl_returning_datatypes.GetCount() > 1)
 		{
 			// Use separate assignment statements for OUT variables in Oracle
-			if(_spl_scope == SQL_SCOPE_PROC && num > 0 && Target(SQL_ORACLE) == true)
+			if( ( _spl_scope == SQL_SCOPE_PROC || _spl_scope == SQL_SCOPE_FUNC ) && num > 0 && Target(SQL_ORACLE, SQL_POSTGRESQL) == true)
 			{
 				InformixReturnToAssignment(return_list);
 
