@@ -184,7 +184,10 @@ void SqlParser::InformixConvertReturning(Token *create, Token *procedure)
 				// Remove RETURNS/RETURNING
 				Token::ReplaceWithSpaces(_spl_returns);
 			
-				Token::Change(_spl_param_close, ",", L",", 1);
+				if ( _spl_parameters.GetCount() == 0 )
+					Token::Remove(_spl_param_close);
+				else
+					Token::Change(_spl_param_close, ",", L",", 1);
 				Token::Change(_spl_returning_end, ")", L")", 1);
 			}
 		}
