@@ -35,3 +35,6 @@ all: sqlparser.a
 
 sqlparser.a: $(OBJS)
 	ar rcs $@ $(OBJS)
+
+clean:
+	rm -f sqlparser.a *.o

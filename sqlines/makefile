@@ -12,3 +12,6 @@ LIBS = ../sqlparser/sqlparser.a
 
 sqlines: $(SRC) $(LIBS)
 	g++ $(CXXFLAGS) $(SRC) $(LIBS) -o $@
+
+clean:
+	rm -f sqlines

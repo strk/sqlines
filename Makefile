@@ -4,3 +4,7 @@ all:
 
 check:
 	$(MAKE) -C test $@
+
+clean:
+	$(MAKE) -C sqlparser $@
+	$(MAKE) -C sqlines $@
