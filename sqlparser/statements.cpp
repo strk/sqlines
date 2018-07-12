@@ -2129,7 +2129,7 @@ bool SqlParser::ParseFunctionParameters(Token *function_name)
 			break;
 	}
 
-	/*Token *close */ (void) GetNextCharToken(')', L')');
+	_spl_param_close = GetNextCharToken(')', L')');
 
 	return true;
 }
