@@ -61,7 +61,7 @@ typedef int (STDCALL *mysql_queryFunc)(MYSQL *mysql, const char *stmt_str);
 typedef int (STDCALL *mysql_optionsFunc)(MYSQL *mysql, enum mysql_option option, const void *arg);
 typedef int (STDCALL *mysql_set_character_setFunc)(MYSQL *mysql, const char *csname);
 typedef void (*mysql_set_local_infile_handlerFunc)(MYSQL *mysql, int (*local_infile_init)(void **, const char *, void *), int (*local_infile_read)(void *, char *, unsigned int), void (*local_infile_end)(void *), int (*local_infile_error)(void *, char*, unsigned int), void *userdata);
-typedef my_bool (STDCALL *mysql_thread_initFunc)();
+typedef bool (STDCALL *mysql_thread_initFunc)();
 typedef MYSQL_RES* (STDCALL *mysql_use_resultFunc)(MYSQL *mysql);
 
 class SqlMysqlApi : public SqlApiBase
