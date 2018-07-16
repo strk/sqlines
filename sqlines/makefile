@@ -1,2 +1,17 @@
-sqlines:
-	g++ applog.cpp file.cpp filelist.cpp main.cpp os.cpp parameters.cpp sqlines.cpp str.cpp ../sqlparser/sqlparser.a -o sqlines
+SRC = \
+  applog.cpp \
+  file.cpp \
+  filelist.cpp \
+  main.cpp \
+  os.cpp \
+  parameters.cpp \
+  sqlines.cpp \
+  str.cpp
+
+LIBS = ../sqlparser/sqlparser.a
+
+sqlines: $(SRC) $(LIBS)
+	g++ $(CXXFLAGS) $(SRC) $(LIBS) -o $@
+
+clean:
+	rm -f sqlines
