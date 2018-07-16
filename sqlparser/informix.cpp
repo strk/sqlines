@@ -329,7 +329,7 @@ void SqlParser::InformixConvertReturning(Token *create, Token *procedure)
 
 // Define the name of parameter or column to be used for RETURNING value
 void SqlParser::InformixGetReturningName(Token *retvalue, TokenStr &name, const char *prefix, 
-											const wchar_t *wprefix, size_t plen, int num, bool always_prefix)
+											const wchar_t *wprefix, int64_t plen, int num, bool always_prefix)
 {
 	if(retvalue == NULL)
 		return;

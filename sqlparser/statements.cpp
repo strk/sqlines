@@ -1184,7 +1184,7 @@ bool SqlParser::ParseCommentStatement(Token *comment)
 			Token::ChangeNoFormat(is, "'MS_Description',", L"'MS_Description',", 17);
 
 			int cnt = GetIdentPartsCount(name);
-			size_t len = 0;
+			int64_t len = 0;
 			TokenStr str;
 			TokenStr nm;
 
@@ -1630,7 +1630,7 @@ bool SqlParser::ParseCreateIndex(Token *create, Token *unique, Token *index)
 		ParseExpression(col);
 
 		// For Greenplum, add column to DISTRIBUTED BY in CREATE TABLE
-		if(greenplum_distributed)
+		if(greenplum_distributed && cr_table_end != NULL)
 		{
 			if(count > 0)
 				Append(cr_table_end->book, ", ", L", ", 2);
@@ -5953,7 +5953,7 @@ bool SqlParser::ParseIfStatement(Token *if_, int scope)
 				// Check if BEGIN follows
 				Token *next_begin = GetNext("BEGIN", L"BEGIN", 5);
 
-				if(next_begin == false)
+				if(next_begin == NULL)
 				{
 					Token::Change(then, "BEGIN", L"BEGIN", 5);
 					then_to_begin = true;
