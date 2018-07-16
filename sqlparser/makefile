@@ -1,3 +1,4 @@
+override CXXFLAGS := $(CXXFLAGS) -fpermissive
 
 OBJS = \
   dllmain.o \
