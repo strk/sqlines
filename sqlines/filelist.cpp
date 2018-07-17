@@ -27,15 +27,9 @@
 #else
 #include <sys/stat.h>
 #ifdef __APPLE__
-<<<<<<< HEAD
 #include <sys/uio.h>
 #else
 #include <sys/io.h>
-=======
-        #include <sys/uio.h>
-#else
-        #include <sys/io.h>
->>>>>>> master
 #endif
 #include <unistd.h>
 #endif

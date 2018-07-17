@@ -79,7 +79,7 @@ endif(CCACHE_FOUND)
 
 # Top level cmake dir
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
-  set(SQLINES_CXXFLAGS "" CACHE STRING
+  set(SQLINES_CXXFLAGS "-fcomment-block-commands=file" CACHE STRING
     "Compiler flags to append when compiling SQLINES")
 
   option(SQLINES_BUILD_STATIC
