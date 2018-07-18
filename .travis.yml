@@ -1,5 +1,5 @@
 language: c
 
 script:
-	- make
-	- make check
+ - make
+ - make check
