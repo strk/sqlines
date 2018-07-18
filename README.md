@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/renesugar/sqlines.svg)](http://travis-ci.org/renesugar/sqlines)
+
 # SQLines SQL Converter
 
 SQLines SQL Converter is an open source tool (Apache License 2.0) that allows you to convert database schema (DDL), queries and DML statements, views, stored procedures, packages, functions and triggers between Microsoft SQL Server, Oracle, MariaDB, MySQL, PostgreSQL, IBM DB2, Sybase, Informix, Teradata, Greenplum and Netezza.
