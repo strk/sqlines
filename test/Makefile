@@ -3,5 +3,5 @@ TESTS = \
 
 
 check: $(TESTS)
-	@PATH=../sqlines/sqlines:${PATH} \
+	@PATH=../sqlines:${PATH} \
 	./runtests.sh $(TESTS)
