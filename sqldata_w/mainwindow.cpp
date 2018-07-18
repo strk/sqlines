@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <QtConcurrent>
 #endif
+#include <QHeaderView>
 #include <QMessageBox>
 #include <QDesktopWidget>
 #include <QAbstractItemView>
