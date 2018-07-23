@@ -10056,8 +10056,8 @@ bool SqlParser::ParseFunctionBody(Token *create, Token *function, Token *name, T
 	if(Target(SQL_ORACLE, SQL_POSTGRESQL) == true)
 		OracleMoveBeginAfterDeclare(create, as, begin, body_start);
 
-	// Transform DB2, MySQL EXIT HANDLERs to Oracle EXCEPTION
-	if(Source(SQL_DB2, SQL_MYSQL) && Target(SQL_ORACLE))
+	// Transform DB2, MySQL, Teradata EXIT HANDLERs, Informix ON EXCEPTION to Oracle and PostgreSQL EXCEPTION
+	if(Source(SQL_DB2, SQL_MYSQL, SQL_INFORMIX, SQL_TERADATA) && Target(SQL_ORACLE, SQL_POSTGRESQL))
 		OracleExitHandlersToException(end);
 
 	// User-defined delimiter can be specified for MySQL, often // @ (also used for DB2)
