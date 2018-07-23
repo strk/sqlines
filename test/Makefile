@@ -1,5 +1,6 @@
 TESTS = \
-	informix/returning.sql
+	informix/returning.sql \
+	informix/on_exception.sql
 
 
 check: $(TESTS)
