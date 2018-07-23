@@ -1,17 +1,18 @@
 SRC = \
-  applog.cpp \
-  file.cpp \
+  ../sqlcommon/applog.cpp \
+  ../sqlcommon/file.cpp \
   filelist.cpp \
   main.cpp \
-  os.cpp \
-  parameters.cpp \
+  ../sqlcommon/os.cpp \
+  ../sqlcommon/parameters.cpp \
   sqlines.cpp \
-  str.cpp
+  ../sqlcommon/str.cpp
 
 LIBS = ../sqlparser/sqlparser.a
+LDFLAGS = -ldl
 
 sqlines: $(SRC) $(LIBS)
-	g++ $(CXXFLAGS) $(SRC) $(LIBS) -o $@
+	g++ $(CXXFLAGS) $(SRC) $(LIBS) $(LDFLAGS) -o $@
 
 clean:
 	rm -f sqlines
