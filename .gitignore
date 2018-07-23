@@ -2,4 +2,5 @@
 *.o
 *.a
 *.log
+test/*/*_out.sql
 sqlines/sqlines
