@@ -20,6 +20,7 @@
 #define sqlines_sqlparser_h
 
 #include <stdio.h>
+#include <stdint.h>
 #include <map>
 #include "token.h"
 #include "stats.h"
