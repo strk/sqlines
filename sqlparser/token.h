@@ -20,6 +20,7 @@
 #define sqlines_token_h
 
 #include <string>
+#include <stdint.h> // for int64_t
 
 // Token types
 #define TOKEN_WORD		1		// Keyword or unquoted identifier (will be refined later)
